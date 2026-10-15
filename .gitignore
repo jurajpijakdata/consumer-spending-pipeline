@@ -1,0 +1,30 @@
+# Secrets
+.env
+*.env
+!.env.example
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# Data: the raw file is 300 MB and never goes into Git
+data/
+
+# dbt
+target/
+dbt_packages/
+logs/
+.user.yml
+
+# Power BI
+*.pbix
+**/.pbi/cache.abf
+**/.pbi/localSettings.json
+
+# Editor / system
+.vscode/
+Thumbs.db
+*.zip
