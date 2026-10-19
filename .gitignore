@@ -28,3 +28,9 @@ logs/
 .vscode/
 Thumbs.db
 *.zip
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Personal working notes (not part of the project)
+notes/
