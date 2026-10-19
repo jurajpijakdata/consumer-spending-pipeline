@@ -34,3 +34,6 @@ Thumbs.db
 
 # Personal working notes (not part of the project)
 notes/
+
+# any virtual environment folder
+.venv*/
