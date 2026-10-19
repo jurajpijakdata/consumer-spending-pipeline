@@ -17,3 +17,15 @@ az storage container create --name raw --account-name stconsumerspendjp --auth-m
 
 # 5. Upload the original file to the landing zone (login, no keys)
 az storage blob upload --account-name stconsumerspendjp --container-name raw --file data/raw/amazon-purchases.csv --name amazon-purchases.csv --auth-mode login
+
+# 6. SQL server: Entra-only login, me as admin (no SQL passwords)
+$me = az ad signed-in-user show --query id -o tsv
+az sql server create --name sql-consumerspend-jp --resource-group rg-consumer-spending-pipeline --location germanywestcentral --enable-ad-only-auth --external-admin-principal-type User --external-admin-name juraj.pijak.data@gmail.com --external-admin-sid $me
+
+# 7. Firewall: Azure services (for Data Factory) and my current IP
+az sql server firewall-rule create -g rg-consumer-spending-pipeline -s sql-consumerspend-jp -n AllowAzureServices --start-ip-address 0.0.0.0 --end-ip-address 0.0.0.0
+$myip = (Invoke-RestMethod https://api.ipify.org)
+az sql server firewall-rule create -g rg-consumer-spending-pipeline -s sql-consumerspend-jp -n home-pc --start-ip-address $myip --end-ip-address $myip
+
+# 8. Database: free offer, serverless, pauses when the free amount is used up
+az sql db create -g rg-consumer-spending-pipeline -s sql-consumerspend-jp -n sqldb-consumerspend --edition GeneralPurpose --compute-model Serverless --family Gen5 --capacity 2 --use-free-limit --free-limit-exhaustion-behavior AutoPause
