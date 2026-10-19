@@ -39,3 +39,23 @@ Rule: reject what is wrong, keep and label what is incomplete but real.
 - Gift cards often have no shipping state (digital delivery), which explains
   part of the missing states.
 
+## Missing values are connected
+- Title and Category are missing together in 88,832 rows (only 626 / 908 alone):
+  one cause, most likely products no longer listed when the history was exported.
+
+## Over time
+- No gaps: every month 2018 – early 2023 has purchases.
+- Peaks every November–December (Black Friday, Christmas).
+- Rise from 2020 (COVID), maximum end of 2021, 2022 high and flat.
+- Late 2022 may be slightly undercounted (participants joined Nov 2022 – Mar 2023).
+
+## Correlations (monthly)
+- purchases ↔ spending 1.00, purchases ↔ customers 0.95, average price ↔ others ~0.1:
+  spending grew through more items, not higher prices.
+- Caution: correlation is not causation; part of it reflects data coverage
+  (how many participants are in each month).
+
+## Text
+- No extra spaces; all states are 2-letter codes.
+- Category uses two naming systems: system codes (SHOES, ABIS_BOOK) and
+  680 human-readable names (Grocery, Paperback, Ecard Gift Certificate).
