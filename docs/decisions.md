@@ -34,3 +34,12 @@ the source has no payment method to confirm it.
 **Decision:** Year-over-year charts use 2018–2022. 2023 is shown as partial.
 **Why:** Data collection ended Nov 2022 – Mar 2023, so 2023 is incomplete and
 would look like a false collapse in spending.
+
+## 006 — One Copy step, full reload
+**Date:** 2026-10-20
+**Decision:** Data Factory loads the single file with one Copy activity into
+`staging.purchases` (all text), after `DELETE FROM staging.purchases`.
+Retries 2 × 60 s; 4 data integration units.
+**Why:** One source needs no loops; a full reload is idempotent and takes a
+few minutes. CSV escape character set to `"` because titles contain `""`.
+Reconciled: 1,850,717 rows in the file and in staging.
