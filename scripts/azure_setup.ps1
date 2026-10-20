@@ -29,3 +29,8 @@ az sql server firewall-rule create -g rg-consumer-spending-pipeline -s sql-consu
 
 # 8. Database: free offer, serverless, pauses when the free amount is used up
 az sql db create -g rg-consumer-spending-pipeline -s sql-consumerspend-jp -n sqldb-consumerspend --edition GeneralPurpose --compute-model Serverless --family Gen5 --capacity 2 --use-free-limit --free-limit-exhaustion-behavior AutoPause
+
+# 9. Data Factory identity: read-only access to the storage account
+$adf = az resource show -g rg-consumer-spending-pipeline -n adf-consumerspend-jp --resource-type Microsoft.DataFactory/factories --query identity.principalId -o tsv
+$scope = az storage account show --name stconsumerspendjp --resource-group rg-consumer-spending-pipeline --query id -o tsv
+az role assignment create --assignee-object-id $adf --assignee-principal-type ServicePrincipal --role "Storage Blob Data Reader" --scope $scope
