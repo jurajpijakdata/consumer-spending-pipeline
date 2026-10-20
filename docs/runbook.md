@@ -9,3 +9,9 @@ and create it again. Check with `python -m pip show <package>` → Location.
 (VS Code ran the script on the active, old connection).
 **Fix:** check with `SELECT DB_NAME()`; run the script on the right connection
 (MS SQL: Connect → choose it); drop the user from the wrong database.
+
+## ADF: "found more columns than expected" (DelimitedTextMoreColumnsThanDefined)
+**Cause:** titles contain quotes written as "" (e.g. 8"" for inches); ADF's default
+escape character is a backslash, so it splits the title into extra columns.
+**Fix:** dataset escape character = double quote (`"escapeChar": "\""`).
+Check the dataset's code view {} — the UI change was not saved once.
