@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: fact_purchases
+    description: One row per valid purchased item (grain). Rejected rows are excluded.
+    columns:
+      - name: purchase_id
+        description: Surrogate key (running number); the source has no purchase ID.
+        data_tests: [unique, not_null]
+      - name: order_date
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_date'), field: date_day}
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_customer'), field: customer_id}
+      - name: category
+        data_tests:
+          - not_null
+          - relationships:
+              arguments: {to: ref('dim_category'), field: category}
+
+  - name: dim_date
+    columns:
+      - name: date_day
+        data_tests: [unique, not_null]
+
+  - name: dim_category
+    columns:
+      - name: category
+        data_tests: [unique, not_null]
+
+  - name: dim_customer
+    columns:
+      - name: customer_id
+        data_tests: [unique, not_null]
