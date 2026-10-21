@@ -1,5 +1,6 @@
 -- Purchases with labels, flags, category groups and validation.
 -- Every row stays here; rejection_reasons explains why a row is invalid.
+{{ config(materialized='table') }}
 
 with purchases as (
 
