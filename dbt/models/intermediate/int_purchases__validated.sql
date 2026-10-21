@@ -115,7 +115,7 @@ validated as (
         *,
         nullif(concat_ws('; ',
             case when order_date is null then 'invalid order date: ' + order_date_raw end,
-            case when order_date > '2023-03-31' then 'order date after data collection ended' end,
+            case when order_date > '2023-03-31' then 'order date after data collection ended (likely a scheduled future order)' end,
             case when unit_price_usd is null then 'invalid price' end,
             case when quantity is null then 'invalid quantity' end
         ), '') as rejection_reasons

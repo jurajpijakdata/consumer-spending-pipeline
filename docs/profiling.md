@@ -19,8 +19,11 @@ Rule: reject what is wrong, keep and label what is incomplete but real.
 
 ## Dates
 - Range 2018-01-01 to 2024-08-15. Data was collected Nov 2022 – Mar 2023,
-  so 1 row dated 2024-08-15 is invalid (a protection plan; the date is
-  probably not the purchase date) → rejected with a reason.
+  so 18 rows dated after March 2023 are invalid → rejected with a reason:
+  17 from May–Sept 2023, mostly on the 1st–3rd of a month (vitamins, pet food,
+  household items — likely scheduled Subscribe & Save orders exported with
+  future dates), and 1 dated 2024-08-15 (a protection plan).
+  Found by the dbt rule, not by profiling: profiling only looked at the maximum.
 - 2023 is only partly covered (Jan–Mar, depending on when people joined)
   → yearly trends use complete years 2018–2022 only.
 - Purchases +54 % from 2019 to 2020 (COVID): a real pattern, not generated.
