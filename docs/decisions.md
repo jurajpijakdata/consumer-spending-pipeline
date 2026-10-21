@@ -43,3 +43,12 @@ Retries 2 × 60 s; 4 data integration units.
 **Why:** One source needs no loops; a full reload is idempotent and takes a
 few minutes. CSV escape character set to `"` because titles contain `""`.
 Reconciled: 1,850,717 rows in the file and in staging.
+
+## 007 — Category groups with keyword rules, stopped at ~78 % coverage
+**Date:** 2026-10-21
+**Decision:** 1,871 categories are grouped into 16 groups by keyword rules in
+`int_purchases__validated`. After 4 rounds, "Other" is 16.7 % of spending and
+"Unknown" 5.3 %, so real groups cover ~78 %. Stopped there.
+**Why:** Each round helped about half as much as the one before (60.4 → 35.9 →
+23.3 → 16.7 % Other); the rest is a long tail of small categories. Rule order
+matters (e.g. TABLETOP_GAME contains TABLET); `assert_category_traps` guards it.
