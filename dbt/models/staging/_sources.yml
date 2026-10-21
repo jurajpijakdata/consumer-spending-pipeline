@@ -1,0 +1,11 @@
+version: 2
+
+sources:
+  - name: raw
+    description: >
+      Purchases file of Open e-commerce 1.0 (Berke et al., 2023, CC0),
+      loaded unchanged by Azure Data Factory. All columns are text.
+    schema: staging
+    tables:
+      - name: purchases
+        description: One row per purchased item, 1,850,717 rows, 2018 to early 2023
