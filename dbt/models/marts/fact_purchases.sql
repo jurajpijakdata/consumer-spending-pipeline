@@ -15,7 +15,7 @@ select
     )                    as purchase_id,
     order_date,
     customer_id,
-    category_label       as category,
+    upper(category_label) as category,   -- one spelling per category (APPAREL = Apparel)
     category_group,
     state_label          as state,
     product_code,
