@@ -2,27 +2,30 @@ table _Measures
 	lineageTag: 68c92444-41a2-439f-9953-230ee5cd8784
 
 	measure Spending = CALCULATE ( SUM ( 'dbt_dev fact_purchases'[spend_usd] ), 'dbt_dev fact_purchases'[is_gift_card] = 0 )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		lineageTag: f573f35c-2f2e-4e01-9f2d-dd3cefc47c9f
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure Purchases = COUNTROWS ( 'dbt_dev fact_purchases' )
 		formatString: 0
 		lineageTag: 23c217f6-6dab-44af-8436-b399911f484d
 
 	measure Customers = DISTINCTCOUNT ( 'dbt_dev fact_purchases'[customer_id] )
-		formatString: 0
+		formatString: #,0.000
 		lineageTag: ac4735ff-d3c7-4f05-b594-3408bccb88f8
 
 	measure 'Median Spending per Customer' = MEDIANX ( VALUES ( 'dbt_dev fact_purchases'[customer_id] ), [Spending] )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		lineageTag: 4a44620e-d171-4c25-bdb1-002c6a065576
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Median Item Price' = MEDIAN ( 'dbt_dev fact_purchases'[unit_price_usd] )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
 		lineageTag: 9707afc1-1694-4a3e-9f83-61ddbdef0b69
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
 
 	measure 'Spending PY' = CALCULATE ( [Spending], DATEADD ( 'dbt_dev dim_date'[date_day], -1, YEAR ) )
 		lineageTag: 392e63e4-1395-4fd5-b3d8-9e73fea3f917
@@ -33,6 +36,9 @@ table _Measures
 		lineageTag: 514ce9db-6676-4ad6-8de5-392c710c0ae5
 
 		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Customers Label' = FORMAT ( [Customers], "#,0" )
+		lineageTag: 8c843ef4-d4c4-4e6f-89e3-de84ed4e18cb
 
 	partition _Measures = m
 		mode: import

@@ -58,6 +58,17 @@ table 'dbt_dev dim_date'
 
 		annotation SummarizationSetBy = Automatic
 
+	column month_start
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: b3a0b671-6ad3-4f7c-b17e-768652b3621b
+		summarizeBy: none
+		sourceColumn: month_start
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
 	partition 'dbt_dev dim_date' = m
 		mode: import
 		source =
