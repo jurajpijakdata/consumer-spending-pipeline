@@ -12,6 +12,8 @@ select
     dateadd(day, n, cast('2018-01-01' as date))                          as date_day,
     year(dateadd(day, n, cast('2018-01-01' as date)))                    as year,
     month(dateadd(day, n, cast('2018-01-01' as date)))                   as month,
+    datefromparts(year(dateadd(day, n, cast('2018-01-01' as date))),
+            month(dateadd(day, n, cast('2018-01-01' as date))), 1)       as month_start,  
     format(dateadd(day, n, cast('2018-01-01' as date)), 'yyyy-MM')       as year_month,
     datepart(quarter, dateadd(day, n, cast('2018-01-01' as date)))       as quarter,
     case when year(dateadd(day, n, cast('2018-01-01' as date))) between 2018 and 2022
