@@ -1,0 +1,37 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.14.0/schema.json",
+  "name": "4bdafe3e7bba341b9ecb",
+  "position": {
+    "x": 47.093156945962441,
+    "y": 1016.863351833189,
+    "z": 5000,
+    "height": 45.348965947963833,
+    "width": 1826.1679749045436,
+    "tabOrder": 5000
+  },
+  "visual": {
+    "visualType": "textbox",
+    "objects": {
+      "general": [
+        {
+          "properties": {
+            "paragraphs": [
+              {
+                "textRuns": [
+                  {
+                    "value": "Real public data: purchases of 5,026 U.S. consumers (Open e-commerce 1.0, MIT, CC0). Complete years 2018–2022 only. Spending excludes gift cards.",
+                    "textStyle": {
+                      "fontSize": "16pt"
+                    }
+                  }
+                ],
+                "horizontalTextAlignment": "center"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  }
+}

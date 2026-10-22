@@ -40,6 +40,38 @@ table _Measures
 	measure 'Customers Label' = FORMAT ( [Customers], "#,0" )
 		lineageTag: 8c843ef4-d4c4-4e6f-89e3-de84ed4e18cb
 
+	measure 'Spending 2019' = CALCULATE ( [Spending], 'dbt_dev dim_date'[year] = 2019 )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: f450a734-40d8-4f8b-a53b-09ad0c2d418f
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Spending 2020' = CALCULATE ( [Spending], 'dbt_dev dim_date'[year] = 2020 )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: 1d42d4ff-ef54-43b0-b313-c787d78289f1
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'COVID Growth %' = DIVIDE ( [Spending 2020] - [Spending 2019], [Spending 2019] )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 6e1afe28-c90d-48cb-b728-11f085ac051c
+
+	measure 'Total Spending 2019' = CALCULATE ( [Spending 2019], REMOVEFILTERS ( 'dbt_dev dim_category' ) )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: d91e1b77-bac8-433a-8daa-dfe39864d5ee
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Spending 2020' = CALCULATE ( [Spending 2020], REMOVEFILTERS ( 'dbt_dev dim_category' ) )
+		formatString: \$#,0.00;(\$#,0.00);\$#,0.00
+		lineageTag: a33a5131-c4d8-41ab-a9c4-cb2848bb6617
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-US"}
+
+	measure 'Total Growth %' = DIVIDE ( [Total Spending 2020] - [Total Spending 2019], [Total Spending 2019] )
+		formatString: 0.00%;-0.00%;0.00%
+		lineageTag: 40548729-d76e-4ebc-b7bd-346a5509e50f
+
 	partition _Measures = m
 		mode: import
 		source =
