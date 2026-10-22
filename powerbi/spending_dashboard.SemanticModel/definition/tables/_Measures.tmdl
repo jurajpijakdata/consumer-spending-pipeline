@@ -72,6 +72,10 @@ table _Measures
 		formatString: 0.00%;-0.00%;0.00%
 		lineageTag: 40548729-d76e-4ebc-b7bd-346a5509e50f
 
+	measure 'Category Share %' = DIVIDE ( [Spending], CALCULATE ( [Spending], REMOVEFILTERS ( 'dbt_dev dim_category' ) ) )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: bffd6c2a-9abf-4d02-9c0e-90b2520827ef
+
 	partition _Measures = m
 		mode: import
 		source =
