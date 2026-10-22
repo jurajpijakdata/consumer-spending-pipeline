@@ -1,0 +1,12 @@
+relationship AutoDetected_240f07b9-107c-4e87-b685-4a0d28fbb2b3
+	fromColumn: 'dbt_dev fact_purchases'.category
+	toColumn: 'dbt_dev dim_category'.category
+
+relationship AutoDetected_6c16154d-4702-4a24-9590-0318a0d25fa8
+	fromColumn: 'dbt_dev fact_purchases'.customer_id
+	toColumn: 'dbt_dev dim_customer'.customer_id
+
+relationship 018461aa-52d2-eb47-71a1-cd1631c18959
+	fromColumn: 'dbt_dev fact_purchases'.order_date
+	toColumn: 'dbt_dev dim_date'.date_day
+

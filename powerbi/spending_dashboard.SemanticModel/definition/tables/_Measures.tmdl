@@ -1,0 +1,47 @@
+table _Measures
+	lineageTag: 68c92444-41a2-439f-9953-230ee5cd8784
+
+	measure Spending = CALCULATE ( SUM ( 'dbt_dev fact_purchases'[spend_usd] ), 'dbt_dev fact_purchases'[is_gift_card] = 0 )
+		lineageTag: f573f35c-2f2e-4e01-9f2d-dd3cefc47c9f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Purchases = COUNTROWS ( 'dbt_dev fact_purchases' )
+		formatString: 0
+		lineageTag: 23c217f6-6dab-44af-8436-b399911f484d
+
+	measure Customers = DISTINCTCOUNT ( 'dbt_dev fact_purchases'[customer_id] )
+		formatString: 0
+		lineageTag: ac4735ff-d3c7-4f05-b594-3408bccb88f8
+
+	measure 'Median Spending per Customer' = MEDIANX ( VALUES ( 'dbt_dev fact_purchases'[customer_id] ), [Spending] )
+		lineageTag: 4a44620e-d171-4c25-bdb1-002c6a065576
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Median Item Price' = MEDIAN ( 'dbt_dev fact_purchases'[unit_price_usd] )
+		lineageTag: 9707afc1-1694-4a3e-9f83-61ddbdef0b69
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Spending PY' = CALCULATE ( [Spending], DATEADD ( 'dbt_dev dim_date'[date_day], -1, YEAR ) )
+		lineageTag: 392e63e4-1395-4fd5-b3d8-9e73fea3f917
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Spending YoY %' = DIVIDE ( [Spending] - [Spending PY], [Spending PY] )
+		lineageTag: 514ce9db-6676-4ad6-8de5-392c710c0ae5
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				  Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				  #"Removed Columns"
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,122 @@
+table 'dbt_dev fact_purchases'
+	lineageTag: cc8edd82-7d02-4d5e-a221-a98659fb5f75
+
+	column purchase_id
+		dataType: int64
+		formatString: 0
+		lineageTag: 708a6358-4e99-4681-b3e1-266dba5dc3fc
+		summarizeBy: sum
+		sourceColumn: purchase_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column order_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ee96fb8f-eaa6-40b9-97c0-41fd0382ed5b
+		summarizeBy: none
+		sourceColumn: order_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column customer_id
+		dataType: string
+		lineageTag: 9cef2f4d-0451-49df-a133-907b550ddf57
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column category
+		dataType: string
+		lineageTag: d07bc5c7-cf07-4bad-9bc8-ea94314c9484
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_group
+		dataType: string
+		lineageTag: 6a35e34c-e09d-4415-aa83-96bc6e88a700
+		summarizeBy: none
+		sourceColumn: category_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column state
+		dataType: string
+		lineageTag: 522adc4b-232c-44dc-a484-141e918a6413
+		summarizeBy: none
+		sourceColumn: state
+
+		annotation SummarizationSetBy = Automatic
+
+	column product_code
+		dataType: string
+		lineageTag: 2a70cbdc-cdff-495e-a66c-197201c1a266
+		summarizeBy: none
+		sourceColumn: product_code
+
+		annotation SummarizationSetBy = Automatic
+
+	column quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: a9cd6c0d-8a92-4409-b009-af689c855da1
+		summarizeBy: sum
+		sourceColumn: quantity
+
+		annotation SummarizationSetBy = Automatic
+
+	column unit_price_usd
+		dataType: double
+		lineageTag: bd0e075c-6c77-4ab2-8174-2212474c7180
+		summarizeBy: sum
+		sourceColumn: unit_price_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column spend_usd
+		dataType: double
+		lineageTag: b2a957ed-62ac-481b-bfb9-150faf485b38
+		summarizeBy: sum
+		sourceColumn: spend_usd
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column is_gift_card
+		dataType: int64
+		formatString: 0
+		lineageTag: 75693d52-cf43-4fdb-ae7c-b0a94c2a92fe
+		summarizeBy: sum
+		sourceColumn: is_gift_card
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_unlisted_product
+		dataType: int64
+		formatString: 0
+		lineageTag: fd44d5a6-06e2-4cbb-9e66-294229db5a44
+		summarizeBy: sum
+		sourceColumn: is_unlisted_product
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dbt_dev fact_purchases' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("sql-consumerspend-jp.database.windows.net", "sqldb-consumerspend"),
+				  #"Navigation 1" = Source{[Schema = "dbt_dev", Item = "fact_purchases"]}[Data],
+				  #"Removed columns" = Table.RemoveColumns(#"Navigation 1", {"title"})
+				in
+				  #"Removed columns"
+
+	annotation PBI_ResultType = Table
+

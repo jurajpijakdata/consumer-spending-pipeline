@@ -1,0 +1,53 @@
+table 'dbt_dev dim_customer'
+	lineageTag: ade6b001-ccf6-4c1a-8364-a3d426e35eda
+
+	column customer_id
+		dataType: string
+		lineageTag: 1e20ced9-01d3-4840-a21f-5541ca791d8f
+		summarizeBy: none
+		sourceColumn: customer_id
+
+		annotation SummarizationSetBy = Automatic
+
+	column first_purchase_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: e0194658-b3fd-4e1e-acf0-846eb7072e12
+		summarizeBy: none
+		sourceColumn: first_purchase_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column last_purchase_date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ba19ff4a-ee89-47b3-953f-cdd6932e91d6
+		summarizeBy: none
+		sourceColumn: last_purchase_date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column purchases
+		dataType: int64
+		formatString: 0
+		lineageTag: e3491bba-88ce-419a-be84-d575ad673682
+		summarizeBy: sum
+		sourceColumn: purchases
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dbt_dev dim_customer' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("sql-consumerspend-jp.database.windows.net", "sqldb-consumerspend"),
+				  #"Navigation 1" = Source{[Schema = "dbt_dev", Item = "dim_customer"]}[Data]
+				in
+				  #"Navigation 1"
+
+	annotation PBI_ResultType = Table
+

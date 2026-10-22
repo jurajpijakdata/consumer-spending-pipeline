@@ -1,0 +1,39 @@
+table 'dbt_dev dim_category'
+	lineageTag: d7d4c6ff-c282-4019-877c-54ec8f5593b0
+
+	column category
+		dataType: string
+		lineageTag: 8322db32-f35e-4c52-93cd-2ce65f8e2c27
+		summarizeBy: none
+		sourceColumn: category
+
+		annotation SummarizationSetBy = Automatic
+
+	column category_group
+		dataType: string
+		lineageTag: f50371b2-bbc2-4dbb-98dc-a89a196994a9
+		summarizeBy: none
+		sourceColumn: category_group
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_gift_card
+		dataType: int64
+		formatString: 0
+		lineageTag: 1e1e619a-cceb-4913-b781-0df3078995a8
+		summarizeBy: none
+		sourceColumn: is_gift_card
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dbt_dev dim_category' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("sql-consumerspend-jp.database.windows.net", "sqldb-consumerspend"),
+				  #"Navigation 1" = Source{[Schema = "dbt_dev", Item = "dim_category"]}[Data]
+				in
+				  #"Navigation 1"
+
+	annotation PBI_ResultType = Table
+

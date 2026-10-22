@@ -1,0 +1,71 @@
+table 'dbt_dev dim_date'
+	lineageTag: 90a2dce5-8ece-498d-8072-3fe3836975e3
+	dataCategory: Time
+
+	column date_day
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: b1423cae-201c-4b65-884f-f031978f5c7a
+		summarizeBy: none
+		sourceColumn: date_day
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column year
+		dataType: int64
+		formatString: 0
+		lineageTag: 5eae0d3c-23fc-44e4-8f7b-7f4cd87dfa8d
+		summarizeBy: none
+		sourceColumn: year
+
+		annotation SummarizationSetBy = Automatic
+
+	column month
+		dataType: int64
+		formatString: 0
+		lineageTag: 0c8b0482-830d-498d-ab4b-1282b55bcb02
+		summarizeBy: none
+		sourceColumn: month
+
+		annotation SummarizationSetBy = Automatic
+
+	column year_month
+		dataType: string
+		lineageTag: f92ef2c9-ddf9-412e-b694-098084eda99a
+		summarizeBy: none
+		sourceColumn: year_month
+
+		annotation SummarizationSetBy = Automatic
+
+	column quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 5e205762-5a7d-4de7-b287-8ad5a38004e1
+		summarizeBy: none
+		sourceColumn: quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column is_complete_year
+		dataType: int64
+		formatString: 0
+		lineageTag: eb8f82e9-5a04-4d8d-b2dc-adcc29d27bb7
+		summarizeBy: none
+		sourceColumn: is_complete_year
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'dbt_dev dim_date' = m
+		mode: import
+		source =
+				let
+				  Source = Sql.Database("sql-consumerspend-jp.database.windows.net", "sqldb-consumerspend"),
+				  #"Navigation 1" = Source{[Schema = "dbt_dev", Item = "dim_date"]}[Data]
+				in
+				  #"Navigation 1"
+
+	annotation PBI_ResultType = Table
+
