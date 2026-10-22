@@ -249,23 +249,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "8a67bd4193ef18bb330c",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Total Spending 2020"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

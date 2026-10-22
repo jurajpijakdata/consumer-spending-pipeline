@@ -250,20 +250,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "3ba6393b17fdc99e532d",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "COVID Growth %"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

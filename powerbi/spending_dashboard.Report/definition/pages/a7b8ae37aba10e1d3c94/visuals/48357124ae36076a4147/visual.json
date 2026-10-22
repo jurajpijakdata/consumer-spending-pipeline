@@ -4,10 +4,10 @@
   "position": {
     "x": 973.25857688322378,
     "y": 317.44276163574682,
-    "z": 6001,
+    "z": 7000,
     "height": 671.51353422946443,
     "width": 929.65380193325848,
-    "tabOrder": 6001
+    "tabOrder": 7000
   },
   "visual": {
     "visualType": "clusteredBarChart",
@@ -455,34 +455,6 @@
             }
           ]
         }
-      },
-      {
-        "name": "602abfa0831d2bfe8146",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Spending 2019"
-          }
-        },
-        "type": "Advanced"
-      },
-      {
-        "name": "1bf794d925c7f2c8a3c7",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Spending 2020"
-          }
-        },
-        "type": "Advanced"
       }
     ]
   }

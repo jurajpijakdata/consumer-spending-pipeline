@@ -76,6 +76,14 @@ table _Measures
 		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: bffd6c2a-9abf-4d02-9c0e-90b2520827ef
 
+	measure 'Unknown Category Share' = DIVIDE ( SUM ( 'dbt_dev dq_summary'[unknown_category_rows] ), SUM ( 'dbt_dev dq_summary'[all_rows] ) )
+		formatString: 0.0%;-0.0%;0.0%
+		lineageTag: 1be16710-c43b-4cb8-a6e5-cab2e060a637
+
+	measure 'Rejected Rows' = SUM ( 'dbt_dev dq_summary'[rejected_rows] )
+		formatString: 0
+		lineageTag: 7e4b6d18-25df-4409-93bd-ff0378fbdfd4
+
 	partition _Measures = m
 		mode: import
 		source =

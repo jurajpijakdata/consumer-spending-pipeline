@@ -202,23 +202,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "b81fc3016011f5ab794f",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Total Growth %"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

@@ -202,23 +202,5 @@
       ]
     },
     "drillFilterOtherVisuals": true
-  },
-  "filterConfig": {
-    "filters": [
-      {
-        "name": "92fd4512230a0846fc5a",
-        "field": {
-          "Measure": {
-            "Expression": {
-              "SourceRef": {
-                "Entity": "_Measures"
-              }
-            },
-            "Property": "Total Spending 2019"
-          }
-        },
-        "type": "Advanced"
-      }
-    ]
   }
 }

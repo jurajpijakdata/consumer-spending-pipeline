@@ -39,23 +39,21 @@ table 'dbt_dev dq_summary'
 
 	column gift_card_share
 		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 38920eb1-f5db-4c96-8dc1-47e5218bf79d
 		summarizeBy: sum
 		sourceColumn: gift_card_share
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
-
 	column other_group_share
 		dataType: double
+		formatString: 0.0%;-0.0%;0.0%
 		lineageTag: 8c6c8f0b-b7ab-4d97-894c-d107f95700ee
 		summarizeBy: sum
 		sourceColumn: other_group_share
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	partition 'dbt_dev dq_summary' = m
 		mode: import
