@@ -1,0 +1,15 @@
+{
+	"name": "adf-consumerspend-jp",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "germanywestcentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "f1cebd39-808e-4118-aa58-e25ad6303633",
+		"tenantId": "e7745818-0702-499c-b1f5-93feb993948d"
+	}
+}

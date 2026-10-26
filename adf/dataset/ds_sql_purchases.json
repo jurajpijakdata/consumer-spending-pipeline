@@ -1,0 +1,59 @@
+{
+	"name": "ds_sql_purchases",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_sql_staging",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Order Date",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Purchase Price Per Unit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Quantity",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Shipping Address State",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ASIN/ISBN (Product Code)",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Category",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Survey ResponseID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "_source_file",
+				"type": "nvarchar"
+			},
+			{
+				"name": "_loaded_at",
+				"type": "datetime2",
+				"scale": 7
+			}
+		],
+		"typeProperties": {
+			"schema": "staging",
+			"table": "purchases"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
