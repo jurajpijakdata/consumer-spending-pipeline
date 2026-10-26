@@ -6,3 +6,6 @@
 *.bat text eol=crlf
 
 notebooks/*.ipynb linguist-documentation
+
+*.sql linguist-detectable=true linguist-language=TSQL
+scripts/*.ps1 linguist-documentation
