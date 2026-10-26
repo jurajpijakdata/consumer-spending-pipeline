@@ -16,6 +16,7 @@ EXPECTED_MD5 = "3549d72735b1211ab009ff0177b94bd9"
 OUTPUT = Path(__file__).resolve().parent.parent / "data" / "raw" / "amazon-purchases.csv"
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s | %(message)s")
+logger = logging.getLogger(__name__)
 
 
 def main() -> None:
@@ -31,8 +32,8 @@ def main() -> None:
     actual = md5.hexdigest()
     if actual != EXPECTED_MD5:
         raise SystemExit(f"MD5 mismatch: expected {EXPECTED_MD5}, got {actual}")
-    logging.info("Downloaded %s (%.1f MB), MD5 verified",
-                 OUTPUT, OUTPUT.stat().st_size / 1e6)
+    logger.info("Downloaded %s (%.1f MB), MD5 verified",
+                OUTPUT, OUTPUT.stat().st_size / 1e6)
 
 
 if __name__ == "__main__":
