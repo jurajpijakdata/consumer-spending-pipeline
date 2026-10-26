@@ -4,3 +4,5 @@
 # Windows scripts need Windows line endings.
 *.ps1 text eol=crlf
 *.bat text eol=crlf
+
+notebooks/*.ipynb linguist-documentation
